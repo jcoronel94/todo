@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.3",
     "vue": "^2.6.12"
   },
   "devDependencies": {
@@ -33,8 +35,8 @@
       "parser": "babel-eslint"
     },
     "rules": {
-      "vue/html-self-closing": "on",
-      "no-console":0
+      "vue/html-self-closing": 1,
+      "no-console": 0
     }
   },
   "browserslist": [

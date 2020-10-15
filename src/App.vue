@@ -1,19 +1,16 @@
 // html part
 <template>
   <div id="app">
-    <div class ="todo-wrapper">
+    <div class="todo-wrapper">
       <div class="todo-container">
-        <div class="todo-list">
-          <div class="todo-item">
-            <div class ="todo-item-content-title">
-            Walk
-            </div>
-            <div class="todo-item-content-description">
-            go there
-            </div>
-          </div>
+        <todo-list :todos="todos" />
+        <div class="todo-create-btn-container">
+          <div class="app-button">create</div>
         </div>
       </div>
+    </div>
+    <div class="modal">
+      <div class="modal-content">Modal</div>
     </div>
   </div>
 </template>
@@ -23,23 +20,32 @@
 // js part
 <script>
 import playground from "./playground";
+import TodoList from "@/components/TodoList";
 
 export default {
   name: "App",
+  components: {
+    TodoList,
+  },
   data() {
     return {
-      text: "string",
-      number: 1,
-      canDecide: true,
-      list: [1, 2, 3],
-      someObject: {
-        a: 1,
-        b: 2,
-        c: [1, 2, 3, 4]
-      },
-      dataFunction() {
-        console.log("hi");
-      }
+      todos: [
+        {
+          _id: "1",
+          title: "walk the dog",
+          description: "do it now",
+        },
+        {
+          _id: "2",
+          title: "walk the dog2",
+          description: "do it now2",
+        },
+        {
+          _id: "3",
+          title: "walk the dog3",
+          description: "do it now3",
+        },
+      ],
     };
   },
   methods: {
@@ -47,18 +53,18 @@ export default {
       console.log(this.text);
       console.log(this.someNumber);
       this.dataFunction();
-    }
+    },
   },
   created() {
     playground();
-  }
+  },
 };
 </script>
 
 
 
 // styles part
-<style>
+<style scoped lang ="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -68,36 +74,46 @@ export default {
   margin-top: 60px;
 }
 
-.todo-container {
-  width: 400px;
-  background-color: #ededed;
-  min-height: 400px;
-  margin:0 auto;
-  border-radius: 5px;
-}
-
-.todo-wrapper{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.todo-item{
-  background-color: gray;
-  height:70px;
-  margin: 10px;
-  color:white;
-  border-radius: 5px;
-  font-size: 23px;
+.app-button {
+  font-size: 20px;
   padding: 10px;
-}
-
-.todo-item-content-title{
+  border-radius: 5px;
+  background-color: #795899;
+  color: white;
   font-weight: bold;
-
 }
 
-.todo-item-content-description{
-  font-size: 19px;
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  &-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    border: 1px solid #888;
+  }
+}
+
+.todo {
+  &-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  &-container {
+    width: 400px;
+    background-color: #ededed;
+    min-height: 400px;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
 }
 </style>
