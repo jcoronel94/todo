@@ -9,9 +9,7 @@
         </div>
       </div>
     </div>
-    <div class="modal">
-      <div class="modal-content">Modal</div>
-    </div>
+    <modal />
   </div>
 </template>
 
@@ -21,11 +19,13 @@
 <script>
 import playground from "./playground";
 import TodoList from "@/components/TodoList";
+import Modal from "@/components/Modal";
 
 export default {
   name: "App",
   components: {
     TodoList,
+    Modal,
   },
   data() {
     return {
@@ -81,24 +81,8 @@ export default {
   background-color: #795899;
   color: white;
   font-weight: bold;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  &-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    width: 80%;
-    border: 1px solid #888;
+  &:hover {
+    cursor: pointer;
   }
 }
 
@@ -108,7 +92,12 @@ export default {
     justify-content: center;
     width: 100%;
   }
+  &-create-btn-container {
+    margin: 10px;
+  }
   &-container {
+    display: flex;
+    flex-direction: column;
     width: 400px;
     background-color: #ededed;
     min-height: 400px;

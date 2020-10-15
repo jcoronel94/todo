@@ -36,7 +36,8 @@
     },
     "rules": {
       "vue/html-self-closing": 1,
-      "no-console": 0
+      "no-console": 0,
+      "no-unused-labels":"off"
     }
   },
   "browserslist": [
