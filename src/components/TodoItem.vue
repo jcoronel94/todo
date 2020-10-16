@@ -3,32 +3,41 @@
     <div class="todo-item-content-title">{{ title }}</div>
     <div class="todo-item-content-description">{{ description }}</div>
 
-    <button @click="editMode = true;" class="app-button is-warning">Edit</button>
-      <button @click="deleteTodo" class="app-button is-danger">Delete</button>
+    <button @click="editMode = true" class="app-button is-warning">Edit</button>
+    <button @click="deleteTodo" class="app-button is-danger">Delete</button>
   </div>
 
   <div v-else class="todo-item">
     <form class="app-form">
       <div class="form-control">
         <label class="label">Title</label>
-        <input :value="title" class="form-input" type="text" />
+        <input v-model="todo.title" class="form-input" type="text" />
       </div>
       <div class="form-control">
         <label class="label">Description</label>
-        <textarea  :value="description" cols="30" rows="5" class="form-input"> </textarea>
+        <textarea
+          v-model="todo.description"
+          cols="30"
+          rows="5"
+          class="form-input"
+        >
+        </textarea>
       </div>
 
-      <button 
-        @click.prevent="editTodo" 
-        class="app-button is-warning">Update</button>
-      <button 
-        @click.prevent="editMode=false" 
-        class="app-button is-danger">Cancel</button>
+      <button @click.prevent="editTodo" class="app-button is-warning">
+        Update
+      </button>
+      <button @click.prevent="editMode = false" class="app-button is-danger">
+        Cancel
+      </button>
     </form>
   </div>
 </template>
 
+
 <script>
+import store from "@/store";
+
 export default {
   props: {
     title: {
@@ -39,16 +48,26 @@ export default {
       type: String,
       required: false,
     },
+    _id: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
       editMode: false,
+      todo: {
+        _id: this._id,
+        title: this.title,
+        description: this.description,
+      },
     };
   },
   methods: {
-   editTodo(){
-
-   },
+    editTodo() {
+      store.dispatch("updateTodo", { ...this.todo });
+      this.editMode=false
+    },
     deleteTodo() {},
   },
 };

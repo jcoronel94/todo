@@ -3,6 +3,7 @@
     <todo-item
       v-for="todo in todos"
       :key="todo._id"
+      :_id="todo._id"
       :description="todo.description"
       :title="todo.title"
     />

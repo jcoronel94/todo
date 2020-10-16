@@ -19,6 +19,7 @@
 import playground from "./playground";
 import TodoList from "@/components/TodoList";
 import TodoCreate from "@/components/TodoCreate";
+import store from "@/store";
 
 export default {
   name: "App",
@@ -28,23 +29,7 @@ export default {
   },
   data() {
     return {
-      todos: [
-        {
-          _id: "1",
-          title: "walk the dog",
-          description: "do it now",
-        },
-        {
-          _id: "2",
-          title: "walk the dog2",
-          description: "do it now2",
-        },
-        {
-          _id: "3",
-          title: "walk the dog3",
-          description: "do it now3",
-        },
-      ],
+      todos: store.state.todos,
     };
   },
   created() {
@@ -52,7 +37,7 @@ export default {
   },
   methods: {
     createTodo(todo) {
-      this.todos.push(todo);
+      store.dispatch('createTodo',todo);
     },
   },
 };
@@ -66,7 +51,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
   color: #2c3e50;
   margin-top: 60px;
 }
@@ -89,7 +74,7 @@ export default {
     background-color: #ffa753;
   }
   &.is-danger {
-     background-color: #ff5a5a;
+    background-color: #ff5a5a;
   }
   &:hover {
     cursor: pointer;
