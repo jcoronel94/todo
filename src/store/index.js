@@ -1,37 +1,41 @@
 import Vue from 'vue';
 
+
+const INITIAL_DATA = {
+    todos: [
+      
+    ]
+}
 const store = {
     state: {
-        todos: [
-            {
-                _id: "1",
-                title: "walk the dog",
-                description: "do it now",
-            },
-            {
-                _id: "2",
-                title: "walk the dog2",
-                description: "do it now2",
-            },
-            {
-                _id: "3",
-                title: "walk the dog3",
-                description: "do it now3",
-            },
-        ]
+        todos: []
     },
     actions: {
-        createTodo(state,todo) {
+        initStore(state) {
+            const todos = localStorage().getItem('my_todos')
+
+            if (!todos) {
+                Vue.set(state,'todos',INITIAL_DATA)
+            }
+            return state.todos
+        },
+        createTodo(state, todo) {
             todo._id = Math.random.toString(36).substr(2, 7)
             state.todos.push(todo);
         },
-        updateTodo(state,todoToUpdate){
-            const index = state.todos.findIndex((todo)=>{
+        updateTodo(state, todoToUpdate) {
+            const index = state.todos.findIndex((todo) => {
                 return todo._id === todoToUpdate._id
             })
 
-            Vue.set(state.todos, index,todoToUpdate)
+            Vue.set(state.todos, index, todoToUpdate)
             // state.todos[index] = todoToUpdate
+        },
+        deleteTodo(state, todoId) {
+            const index = state.todos.findIndex((todo) => {
+                return todo._id === todoId
+            })
+            state.todos.splice(index, 1)
         }
     }
 

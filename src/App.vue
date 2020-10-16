@@ -16,7 +16,6 @@
 
 // js part
 <script>
-import playground from "./playground";
 import TodoList from "@/components/TodoList";
 import TodoCreate from "@/components/TodoCreate";
 import store from "@/store";
@@ -33,7 +32,7 @@ export default {
     };
   },
   created() {
-    playground();
+    this.todos = store.dispatch('initStore')
   },
   methods: {
     createTodo(todo) {

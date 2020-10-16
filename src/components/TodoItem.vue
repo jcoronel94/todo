@@ -68,7 +68,9 @@ export default {
       store.dispatch("updateTodo", { ...this.todo });
       this.editMode=false
     },
-    deleteTodo() {},
+    deleteTodo() {
+         store.dispatch("deleteTodo",  this.todo._id );
+    },
   },
 };
 </script>

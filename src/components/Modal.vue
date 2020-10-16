@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @click="isOpen = true" class="app-button">create</div>
+    <div @click="isOpen = true" class="app-button">Create</div>
     <div class="modal" :class="{ 'is-active': isOpen }">
       <div class="modal-content">
         <span @click="closeModal" class="close">&times;</span>
