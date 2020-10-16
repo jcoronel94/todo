@@ -1,6 +1,6 @@
 <template>
   <div class="todo-list">
-    <div v-if="todoes && todos.length > 0">
+    <div v-if="todos && todos.length > 0">
       <todo-item
         v-for="todo in todos"
         :key="todo._id"
@@ -10,7 +10,7 @@
       />
     </div>
     <div v-else class="no-todos">
-        No Todos :() Create one !
+        No Goals :() Create one !
     </div>
   </div>
 </template>
