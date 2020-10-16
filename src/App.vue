@@ -5,11 +5,10 @@
       <div class="todo-container">
         <todo-list :todos="todos" />
         <div class="todo-create-btn-container">
-          <div class="app-button">create</div>
+          <todoCreate @formSubmitted="createTodo" />
         </div>
       </div>
     </div>
-    <modal />
   </div>
 </template>
 
@@ -19,13 +18,13 @@
 <script>
 import playground from "./playground";
 import TodoList from "@/components/TodoList";
-import Modal from "@/components/Modal";
+import TodoCreate from "@/components/TodoCreate";
 
 export default {
   name: "App",
   components: {
     TodoList,
-    Modal,
+    TodoCreate,
   },
   data() {
     return {
@@ -48,15 +47,13 @@ export default {
       ],
     };
   },
-  methods: {
-    testFunctionA() {
-      console.log(this.text);
-      console.log(this.someNumber);
-      this.dataFunction();
-    },
-  },
   created() {
     playground();
+  },
+  methods: {
+    createTodo(todo) {
+      this.todos.push(todo);
+    },
   },
 };
 </script>
@@ -64,14 +61,18 @@ export default {
 
 
 // styles part
-<style scoped lang ="scss">
+<style lang ="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.app-error {
+  color: red;
 }
 
 .app-button {
@@ -81,8 +82,36 @@ export default {
   background-color: #795899;
   color: white;
   font-weight: bold;
+  &.is-primary {
+    background-color: green;
+  }
+  &.is-warning {
+    background-color: #ffa753;
+  }
+  &.is-danger {
+     background-color: #ff5a5a;
+  }
   &:hover {
     cursor: pointer;
+  }
+}
+
+.app-form {
+  text-align: left;
+  label {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .form-input {
+    font-size: 17px;
+    padding: 10px;
+  }
+  .form-control {
+    margin-bottom: 10px;
+    &-last {
+      margin-bottom: 0px;
+    }
   }
 }
 

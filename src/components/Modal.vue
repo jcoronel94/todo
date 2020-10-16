@@ -1,21 +1,51 @@
 <template>
-  <div class="modal" :class="{'is-active':isActive}">
-    <div class="modal-content">Modal</div>
+  <div>
+    <div @click="isOpen = true" class="app-button">create</div>
+    <div class="modal" :class="{ 'is-active': isOpen }">
+      <div class="modal-content">
+        <span @click="closeModal" class="close">&times;</span>
+        <slot />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return{
-        isActive: false
-    }
-  }
+    return {
+      isOpen: false,
+    };
+  },
+  watch: {
+    close(isClose, preIsClose) {
+      console.log(preIsClose);
+      if (isClose && this.isOpen) {
+        this.isOpen = false;
+      }
+    },
+  },
+  methods: {
+    closeModal() {
+      this.isOpen = false;
+    },
+  },
 };
 </script>
 
 
 <style scoped lang="scss">
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 8px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .modal {
   display: none;
   position: fixed;
